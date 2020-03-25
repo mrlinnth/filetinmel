@@ -1,0 +1,36 @@
+{
+    "name": "mrlinnth/filetinmel",
+    "description": "File upload package for Laravel.",
+    "keywords": ["plans", "laravel", "subscriptions", "memberships"],
+    "license": "MIT",
+    "type": "library",
+    "require": {
+        "php": "^7.2.0",
+        "illuminate/database": "^6.0.0",
+        "illuminate/support": "^6.0.0",
+        "mrlinnth/youtube" : "@dev"
+    },
+    "require-dev": {
+        "fzaninotto/faker": "~1.4",
+        "illuminate/container": "^6.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Mrlinnth\\Filetinmel\\": "src/"
+        }
+    },
+    "minimum-stability": "dev",
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Mrlinnth\\Filetinmel\\FiletinmelServiceProvider"
+            ]
+        }
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/mrlinnth/youtube"
+        }
+    ]
+}

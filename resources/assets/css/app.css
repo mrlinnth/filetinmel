@@ -1,0 +1,69 @@
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+
+/* custom styles */
+
+label {
+    @apply block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2;
+}
+
+select {
+	@apply block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight;
+}
+select:focus {
+	@apply outline-none bg-white border-gray-500;
+}
+
+input {
+	@apply appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight;
+}
+input:focus {
+	@apply outline-none bg-white border-gray-500;
+}
+input.error {
+	@apply border-red-500;
+}
+input.error:focus {
+	@apply outline-none bg-white;
+}
+
+p.text-error {
+	@apply text-red-500 text-xs italic;
+}
+
+p.text-help {
+	@apply text-gray-600 text-xs italic;
+}
+
+button {
+	line-height: normal;
+}
+
+button, .button {
+	@apply shadow bg-green-500 text-white font-bold p-3 rounded;
+}
+button:hover, .button:hover {
+	@apply bg-green-600;
+}
+button:focus, .button:focus {
+	@apply shadow-outline outline-none;
+}
+
+.table {
+    @apply mt-2;
+}
+.table-full {
+    @apply w-full;
+}  
+.table-full > tbody > tr {
+    @apply table-row border-gray-100 border-b-2
+}
+.table-full > tbody > tr > th {
+    @apply table-cell text-left px-4 py-2
+}
+.table-full > tbody > tr > td {
+    @apply table-cell text-gray-600 p-4
+}

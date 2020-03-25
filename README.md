@@ -1,2 +1,2 @@
 # filetinmel
-Video file uplodate to Youtbue and other file types upload to Amazon S3
+Laravel package for video file upload to YouTube and other file types upload to Amazon S3
