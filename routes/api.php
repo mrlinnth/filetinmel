@@ -1,20 +1,16 @@
 <?php
 
-use Illuminate\Http\Request;
-
 //backend routes
 if (config('filetinmel.backend')) {
 
     Route::prefix('api/filetinmel')
-        ->middleware('api:auth')
+        ->middleware('api')
         ->name('api-filetinmel.')
         ->group(function () {
 
-            Route::get('/', function (Request $request) {
-                return $request->user();
-            })->name('index');
+            Route::post('youtube', '\\Mrlinnth\\Filetinmel\\Http\\Controllers\\Api\\UploadController@youtube')->name('youtube');
 
-            // Route::apiResource('/plans', '\\Mrlinnth\\Filetinmel\\Http\\Controllers\\Api\\PlanController');
+            Route::post('s3', '\\Mrlinnth\\Filetinmel\\Http\\Controllers\\Api\\UploadController@s3')->name('s3');
 
         });
 

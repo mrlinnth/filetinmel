@@ -4,4 +4,6 @@
 
 @section('content')
     <h3>hello world</h3>
+
+    <ftm-test />
 @endsection
