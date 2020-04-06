@@ -43,7 +43,7 @@ export default {
     }
   },
   mounted () {
-    console.log('ftm-test component mounted.')
+    console.log('multiple-files component mounted.')
     this.fetchData()
   }
 }

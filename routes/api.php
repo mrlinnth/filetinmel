@@ -12,6 +12,8 @@ if (config('filetinmel.backend')) {
 
             Route::post('s3', '\\Mrlinnth\\Filetinmel\\Http\\Controllers\\Api\\UploadController@s3')->name('s3');
 
+            Route::get('files', '\\Mrlinnth\\Filetinmel\\Http\\Controllers\\Api\\UploadController@files')->name('files');
+
         });
 
 }

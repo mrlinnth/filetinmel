@@ -6,6 +6,7 @@ use Dawson\Youtube\Facades\Youtube;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Storage;
 
 class UploadController extends Controller
 {
@@ -30,7 +31,7 @@ class UploadController extends Controller
                 'upload' => 'required',
             ]);
 
-            $video = $request->file('upload');
+            $video = $request->file('file');
             $title = $request->title;
             $category_id = ($request->has('category_id')) ? $request->category_id : 22;
             $type = ($request->has('type')) ? $request->type : 'unlisted';
@@ -47,15 +48,38 @@ class UploadController extends Controller
 
     public function s3(Request $request)
     {
-        $path = $request->file('uploadFileObj')->store('images');
+        $path = $request->file('file')->store('files');
 
-        $result = [
-            'success' => true,
-            'error' => null,
-            'url' => $path,
-        ];
+        $result = $this->getFileMeta($path);
 
         return response()->json($result);
+    }
+
+    public function files()
+    {
+        $path = 'dummy.png';
+
+        $result = $this->getFileMeta($path);
+
+        return response()->json($result);
+    }
+
+    public function getFileMeta($path)
+    {
+        $ext = pathinfo($path, PATHINFO_EXTENSION);
+        $mimes = new \Mimey\MimeTypes;
+        $mime = $mimes->getMimeType($ext);
+
+        return [
+            [
+                'name' => $path,
+                'type' => $mime,
+                'extension' => $ext,
+                'size' => Storage::size($path),
+                'url' => Storage::url($path),
+                'src' => Storage::url($path),
+            ],
+        ];
     }
 
 }

@@ -3,15 +3,18 @@
         <p class="text-sm text-gray-300 text-center">Loading...</p>
     </div>
     <div v-else>
+      <div class="w-40">
         <vue-file-agent
           v-model="fileRecords"
-          accept="image/*,video/*,.pdf,.doc,.docx"
-          :linkable="true"
-          maxSize="10MB"
+          accept="video/*"
+          :compact="true"
+          maxSize="1GB"
           :meta="false"
-          uploadUrl="/api/filetinmel/s3"
+          :multiple="false"
+          uploadUrl="/api/filetinmel/youtube"
           @upload="onUpload($event)">
         </vue-file-agent>
+      </div>
     </div>
 </template>
 
@@ -32,18 +35,13 @@ export default {
   methods: {
     fetchData () {
       this.loading = false
-      axios.get('/api/filetinmel/files')
-        .then((response) => {
-          this.loading = false
-          this.fileRecords = response.data
-        })
     },
     onUpload (response) {
       console.log('response', response)
     }
   },
   mounted () {
-    console.log('ftm-test component mounted.')
+    console.log('single-file component mounted.')
     this.fetchData()
   }
 }
