@@ -7,7 +7,8 @@ return [
     | Get Environemnt Variable
     |--------------------------------------------------------------------------
     |
-    | Default: local.
+    | Type: String
+    | Default: local
     |
      */
 
@@ -18,10 +19,23 @@ return [
     | Enable Backend functions or not
     |--------------------------------------------------------------------------
     |
-    | Option: true, false.
+    | Type: String
     | Default: true.
     |
      */
 
     'backend' => true,
+
+    /*
+    |--------------------------------------------------------------------------
+    | S3 bucket folder name
+    |--------------------------------------------------------------------------
+    |
+    | Type: string
+    | Default: uploads
+    |
+     */
+
+    's3_folder' => 'uploads',
+
 ];

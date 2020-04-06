@@ -46,9 +46,10 @@ class UploadController extends Controller
         return response()->json($path);
     }
 
-    public function s3(Request $request)
+    public function upload(Request $request, $f = null)
     {
-        $path = $request->file('file')->store('files');
+        $folder = ($f == null) ? config('filetinmel.s3_folder') : $f;
+        $path = $request->file('file')->store($folder);
 
         $result = $this->getFileMeta($path);
 
@@ -57,9 +58,16 @@ class UploadController extends Controller
 
     public function files()
     {
-        $path = 'dummy.png';
-
-        $result = $this->getFileMeta($path);
+        $paths = [
+            'dummy.png',
+            'dummy.txt',
+        ];
+        $result = [];
+        foreach ($paths as $path) {
+            if (Storage::exists($path)) {
+                $result[] = $this->getFileMeta($path);
+            }
+        }
 
         return response()->json($result);
     }
@@ -71,14 +79,12 @@ class UploadController extends Controller
         $mime = $mimes->getMimeType($ext);
 
         return [
-            [
-                'name' => $path,
-                'type' => $mime,
-                'extension' => $ext,
-                'size' => Storage::size($path),
-                'url' => Storage::url($path),
-                'src' => Storage::url($path),
-            ],
+            'name' => $path,
+            'type' => $mime,
+            'extension' => $ext,
+            'size' => Storage::size($path),
+            'url' => Storage::url($path),
+            'src' => Storage::url($path),
         ];
     }
 

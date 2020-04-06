@@ -5,11 +5,10 @@
     <div v-else>
         <vue-file-agent
           v-model="fileRecords"
-          accept="image/*,video/*,.pdf,.doc,.docx"
+          accept="image/*,video/*,.pdf,.doc,.docx,.txt"
           :linkable="true"
           maxSize="10MB"
-          :meta="false"
-          uploadUrl="/api/filetinmel/s3"
+          uploadUrl="/api/filetinmel/upload"
           @upload="onUpload($event)">
         </vue-file-agent>
     </div>

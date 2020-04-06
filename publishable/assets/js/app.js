@@ -1952,7 +1952,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -23599,11 +23598,10 @@ var render = function() {
         [
           _c("vue-file-agent", {
             attrs: {
-              accept: "image/*,video/*,.pdf,.doc,.docx",
+              accept: "image/*,video/*,.pdf,.doc,.docx,.txt",
               linkable: true,
               maxSize: "10MB",
-              meta: false,
-              uploadUrl: "/api/filetinmel/s3"
+              uploadUrl: "/api/filetinmel/upload"
             },
             on: {
               upload: function($event) {
@@ -23659,7 +23657,7 @@ var render = function() {
               linkable: true,
               maxSize: "10MB",
               meta: false,
-              uploadUrl: "/api/filetinmel/s3"
+              uploadUrl: "/api/filetinmel/upload"
             },
             on: {
               upload: function($event) {
