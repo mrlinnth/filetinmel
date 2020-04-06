@@ -25,7 +25,10 @@
         "laravel": {
             "providers": [
                 "Mrlinnth\\Filetinmel\\FiletinmelServiceProvider"
-            ]
+            ],
+            "aliases": {
+                "Filetinmel": "Mrlinnth\\Filetinmel\\Facades\\Filetinmel"
+            }
         }
     },
     "repositories": [

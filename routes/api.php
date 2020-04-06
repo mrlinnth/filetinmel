@@ -12,7 +12,9 @@ if (config('filetinmel.backend')) {
 
             Route::post('upload/{f?}', '\\Mrlinnth\\Filetinmel\\Http\\Controllers\\Api\\UploadController@upload')->name('upload');
 
-            Route::get('files', '\\Mrlinnth\\Filetinmel\\Http\\Controllers\\Api\\UploadController@files')->name('files');
+            Route::post('files', '\\Mrlinnth\\Filetinmel\\Http\\Controllers\\Api\\UploadController@files')->name('files');
+
+            Route::get('temp', '\\Mrlinnth\\Filetinmel\\Http\\Controllers\\Api\\UploadController@temp')->name('temp');
 
         });
 

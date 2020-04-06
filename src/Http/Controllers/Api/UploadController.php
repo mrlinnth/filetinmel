@@ -6,7 +6,9 @@ use Dawson\Youtube\Facades\Youtube;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Mrlinnth\Filetinmel\Filetinmel;
 
 class UploadController extends Controller
 {
@@ -51,41 +53,31 @@ class UploadController extends Controller
         $folder = ($f == null) ? config('filetinmel.s3_folder') : $f;
         $path = $request->file('file')->store($folder);
 
-        $result = $this->getFileMeta($path);
+        $result = Filetinmel::getFileMeta($path);
 
         return response()->json($result);
     }
 
-    public function files()
+    public function files(Request $request)
     {
-        $paths = [
-            'dummy.png',
-            'dummy.txt',
-        ];
-        $result = [];
-        foreach ($paths as $path) {
+        foreach ($request->paths as $path) {
             if (Storage::exists($path)) {
-                $result[] = $this->getFileMeta($path);
+                $result[] = Filetinmel::getFileMeta($path);
             }
         }
 
         return response()->json($result);
     }
 
-    public function getFileMeta($path)
+    public function temp()
     {
-        $ext = pathinfo($path, PATHINFO_EXTENSION);
-        $mimes = new \Mimey\MimeTypes;
-        $mime = $mimes->getMimeType($ext);
+        $data = DB::table('uploads')->get();
+        $result = [];
+        foreach ($data as $d) {
+            $result[] = 'portfolio_img/' . $d->file_name . '.' . $d->file_type;
+        }
 
-        return [
-            'name' => $path,
-            'type' => $mime,
-            'extension' => $ext,
-            'size' => Storage::size($path),
-            'url' => Storage::url($path),
-            'src' => Storage::url($path),
-        ];
+        return response()->json($result);
     }
 
 }

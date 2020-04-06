@@ -1,6 +1,6 @@
 <template>
     <div v-if="loading">
-        <p class="text-sm text-gray-300 text-center">Loading...</p>
+        <p class="text-sm text-gray-600 text-center">Loading...</p>
     </div>
     <div v-else>
         <vue-file-agent
@@ -25,17 +25,32 @@ export default {
   data () {
     return {
       loading: true,
-      fileRecords: []
+      fileRecords: [],
+      payload: {
+        paths: [
+          'dummy.txt',
+          'dummy.png'
+        ]
+      }
     }
   },
   methods: {
-    fetchData () {
-      this.loading = false
-      axios.get('/api/filetinmel/files')
-        .then((response) => {
-          this.loading = false
-          this.fileRecords = response.data
-        })
+    async fetchData () {
+      this.loading = true
+      try {
+        /*
+        * use the dummy data() or get api data for all the paths for fileRecords
+        *
+        const pathsResponse = await axios.get('/api/filetinmel/temp')
+        this.payload.paths = pathsResponse.data
+        */
+
+        const filesResponse = await axios.post('/api/filetinmel/files', this.payload)
+        this.fileRecords = filesResponse.data
+        this.loading = false
+      } catch (e) {
+        console.error('error', e)
+      }
     },
     onUpload (response) {
       console.log('response', response)
