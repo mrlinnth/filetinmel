@@ -58,6 +58,7 @@ class UploadController extends Controller
 
     public function getFiles(Request $request)
     {
+        $result = [];
         foreach ($request->paths as $path) {
             if (Storage::exists($path)) {
                 $result[] = Filetinmel::getFileMeta($path);
