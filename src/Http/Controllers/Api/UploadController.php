@@ -6,7 +6,6 @@ use Dawson\Youtube\Facades\Youtube;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Mrlinnth\Filetinmel\Filetinmel;
 
@@ -71,11 +70,19 @@ class UploadController extends Controller
 
     public function temp()
     {
-        $data = DB::table('uploads')->get();
-        $result = [];
-        foreach ($data as $d) {
-            $result[] = 'portfolio_img/' . $d->file_name . '.' . $d->file_type;
-        }
+        $result = [
+            "portfolio_img/1521603389_0zEZR0uowU.jpeg",
+            "portfolio_img/1521603393_9DthZiszIf.jpeg",
+            "portfolio_img/1521603396_VR75luWt1k.jpeg",
+            "portfolio_img/1521603396_yIs2ffL9i5.jpeg",
+            "portfolio_img/1521603397_5Q9oCFKtyx.jpeg",
+            "portfolio_img/1521603397_ir7SIYrYZm.jpeg",
+            "portfolio_img/1521603398_szbtoTWPEJ.jpeg",
+            "portfolio_img/1521603399_v6ufNARoBv.jpeg",
+            "portfolio_img/1521603399_h7DEvo6WXk.jpeg",
+            "portfolio_img/1521603400_5pqIlEUcq7.jpeg",
+            "portfolio_img/1521603401_0nOoTUdFX5.jpeg",
+        ];
 
         return response()->json($result);
     }
