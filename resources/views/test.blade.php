@@ -12,7 +12,7 @@
     <hr class="my-10">
 
     <p>Single File</p>
-    <single-file></single-file>
+    <single-file title="Silat Dema"></single-file>
 
     <hr class="my-10">
 

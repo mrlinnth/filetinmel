@@ -34,11 +34,6 @@ export default {
       loading: true,
       fileRecords: [],
       uploadUrl: '/api/filetinmel/youtube',
-      uploadHeader: {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      },
       fileRecordsForUpload: []
     }
   },
@@ -46,30 +41,28 @@ export default {
     fetchData () {
       this.loading = false
     },
-    filesSelected: function (fileRecordsNewlySelected) {
+    filesSelected (fileRecordsNewlySelected) {
       const validFileRecords = fileRecordsNewlySelected.filter((fileRecord) => !fileRecord.error)
       this.fileRecordsForUpload = this.fileRecordsForUpload.concat(validFileRecords)
 
       this.uploadFiles()
     },
-    uploadFiles: function () {
+    async uploadFiles () {
+      try {
       // axios upload
-      const fileForUpload = this.fileRecordsForUpload[this.fileRecordsForUpload.length - 1]
-      const formData = new FormData()
-      formData.append('file', fileForUpload.file)
-      formData.append('title', this.title)
+        const fileForUpload = this.fileRecordsForUpload[this.fileRecordsForUpload.length - 1]
+        const formData = new FormData()
+        formData.append('file', fileForUpload.file)
+        formData.append('title', this.title)
 
-      axios.post(this.uploadUrl, formData, this.uploadHeader)
-        .then(function (response) {
-          console.log('success', response)
+        const filesResponse = await axios.post(this.uploadUrl, formData)
+        const yt_id = filesResponse.data
 
-          this.fileRecords = []
-        })
-        .catch(function (response) {
-          console.log('fail', response)
-        })
-
-      this.fileRecordsForUpload = []
+        // use the uploaded youtube video ID as you wish here
+        this.fileRecordsForUpload = []
+      } catch (e) {
+        console.error('error', e)
+      }
     }
   },
   mounted () {
