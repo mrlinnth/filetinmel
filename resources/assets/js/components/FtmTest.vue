@@ -1,16 +1,20 @@
 <template>
     <div v-if="loading">
-        <p class="text-sm text-gray-600 text-center">Loading...</p>
+        <p class="text-sm text-gray-300 text-center">Loading...</p>
     </div>
     <div v-else>
+      <div class="w-40">
         <vue-file-agent
+          ref="vueFileAgent"
           v-model="fileRecords"
-          accept="image/*,video/*,.pdf,.doc,.docx,.txt"
-          :linkable="true"
-          maxSize="10MB"
-          uploadUrl="/api/filetinmel/upload"
-          @upload="onUpload($event)">
+          accept="video/*"
+          :compact="true"
+          maxSize="1GB"
+          :meta="false"
+          :multiple="false"
+          @select="filesSelected($event)">
         </vue-file-agent>
+      </div>
     </div>
 </template>
 
@@ -22,38 +26,50 @@ export default {
   components: {
     'vue-file-agent': VueFileAgentPlugin.VueFileAgent
   },
+  props: {
+    title: String
+  },
   data () {
     return {
       loading: true,
       fileRecords: [],
-      payload: {
-        paths: [
-          'dummy.txt',
-          'dummy.png'
-        ]
-      }
+      uploadUrl: '/api/filetinmel/youtube',
+      uploadHeader: {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      },
+      fileRecordsForUpload: []
     }
   },
   methods: {
-    async fetchData () {
-      this.loading = true
-      try {
-        /*
-        * use the dummy data() or get api data for all the paths for fileRecords
-        *
-        const pathsResponse = await axios.get('/api/filetinmel/temp')
-        this.payload.paths = pathsResponse.data
-        */
-
-        const filesResponse = await axios.post('/api/filetinmel/files', this.payload)
-        this.fileRecords = filesResponse.data
-        this.loading = false
-      } catch (e) {
-        console.error('error', e)
-      }
+    fetchData () {
+      this.loading = false
     },
-    onUpload (response) {
-      console.log('response', response)
+    filesSelected: function (fileRecordsNewlySelected) {
+      const validFileRecords = fileRecordsNewlySelected.filter((fileRecord) => !fileRecord.error)
+      this.fileRecordsForUpload = this.fileRecordsForUpload.concat(validFileRecords)
+
+      this.uploadFiles()
+    },
+    uploadFiles: function () {
+      // axios upload
+      const fileForUpload = this.fileRecordsForUpload[this.fileRecordsForUpload.length - 1]
+      const formData = new FormData()
+      formData.append('file', fileForUpload.file)
+      formData.append('title', this.title)
+
+      axios.post(this.uploadUrl, formData, this.uploadHeader)
+        .then(function (response) {
+          console.log('success', response)
+
+          this.fileRecords = []
+        })
+        .catch(function (response) {
+          console.log('fail', response)
+        })
+
+      this.fileRecordsForUpload = []
     }
   },
   mounted () {

@@ -1944,6 +1944,95 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue_file_agent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-file-agent */ "./node_modules/vue-file-agent/dist/vue-file-agent.umd.js");
+/* harmony import */ var vue_file_agent__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_file_agent__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vue_file_agent_dist_vue_file_agent_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-file-agent/dist/vue-file-agent.css */ "./node_modules/vue-file-agent/dist/vue-file-agent.css");
+/* harmony import */ var vue_file_agent_dist_vue_file_agent_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_file_agent_dist_vue_file_agent_css__WEBPACK_IMPORTED_MODULE_1__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    'vue-file-agent': vue_file_agent__WEBPACK_IMPORTED_MODULE_0___default.a.VueFileAgent
+  },
+  props: {
+    title: String
+  },
+  data: function data() {
+    return {
+      loading: true,
+      fileRecords: [],
+      uploadUrl: '/api/filetinmel/youtube',
+      uploadHeader: {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      },
+      fileRecordsForUpload: []
+    };
+  },
+  methods: {
+    fetchData: function fetchData() {
+      this.loading = false;
+    },
+    filesSelected: function filesSelected(fileRecordsNewlySelected) {
+      var validFileRecords = fileRecordsNewlySelected.filter(function (fileRecord) {
+        return !fileRecord.error;
+      });
+      this.fileRecordsForUpload = this.fileRecordsForUpload.concat(validFileRecords);
+      this.uploadFiles();
+    },
+    uploadFiles: function uploadFiles() {
+      // axios upload
+      var fileForUpload = this.fileRecordsForUpload[this.fileRecordsForUpload.length - 1];
+      var formData = new FormData();
+      formData.append('file', fileForUpload.file);
+      formData.append('title', this.title);
+      axios.post(this.uploadUrl, formData, this.uploadHeader).then(function (response) {
+        console.log('success', response);
+        this.fileRecords = [];
+      })["catch"](function (response) {
+        console.log('fail', response);
+      });
+      this.fileRecordsForUpload = [];
+    }
+  },
+  mounted: function mounted() {
+    console.log('ftm-test component mounted.');
+    this.fetchData();
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/MultipleFiles.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/MultipleFiles.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vue_file_agent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-file-agent */ "./node_modules/vue-file-agent/dist/vue-file-agent.umd.js");
@@ -1956,6 +2045,7 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
 //
 //
 //
@@ -1997,7 +2087,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                this.loading = true;
+                this.loading = false;
                 _context.prev = 1;
                 _context.next = 4;
                 return axios.post('/api/filetinmel/files', this.payload);
@@ -2028,70 +2118,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return fetchData;
     }(),
-    onUpload: function onUpload(response) {
-      console.log('response', response);
-    }
-  },
-  mounted: function mounted() {
-    console.log('ftm-test component mounted.');
-    this.fetchData();
-  }
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/MultipleFiles.vue?vue&type=script&lang=js&":
-/*!*******************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/MultipleFiles.vue?vue&type=script&lang=js& ***!
-  \*******************************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue_file_agent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-file-agent */ "./node_modules/vue-file-agent/dist/vue-file-agent.umd.js");
-/* harmony import */ var vue_file_agent__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_file_agent__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vue_file_agent_dist_vue_file_agent_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-file-agent/dist/vue-file-agent.css */ "./node_modules/vue-file-agent/dist/vue-file-agent.css");
-/* harmony import */ var vue_file_agent_dist_vue_file_agent_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_file_agent_dist_vue_file_agent_css__WEBPACK_IMPORTED_MODULE_1__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  components: {
-    'vue-file-agent': vue_file_agent__WEBPACK_IMPORTED_MODULE_0___default.a.VueFileAgent
-  },
-  data: function data() {
-    return {
-      loading: true,
-      fileRecords: []
-    };
-  },
-  methods: {
-    fetchData: function fetchData() {
-      var _this = this;
-
-      this.loading = false;
-      axios.get('/api/filetinmel/files').then(function (response) {
-        _this.loading = false;
-        _this.fileRecords = response.data;
-      });
-    },
     onUpload: function onUpload(response) {
       console.log('response', response);
     }
@@ -24380,36 +24406,41 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _vm.loading
     ? _c("div", [
-        _c("p", { staticClass: "text-sm text-gray-600 text-center" }, [
+        _c("p", { staticClass: "text-sm text-gray-300 text-center" }, [
           _vm._v("Loading...")
         ])
       ])
-    : _c(
-        "div",
-        [
-          _c("vue-file-agent", {
-            attrs: {
-              accept: "image/*,video/*,.pdf,.doc,.docx,.txt",
-              linkable: true,
-              maxSize: "10MB",
-              uploadUrl: "/api/filetinmel/upload"
-            },
-            on: {
-              upload: function($event) {
-                return _vm.onUpload($event)
-              }
-            },
-            model: {
-              value: _vm.fileRecords,
-              callback: function($$v) {
-                _vm.fileRecords = $$v
+    : _c("div", [
+        _c(
+          "div",
+          { staticClass: "w-40" },
+          [
+            _c("vue-file-agent", {
+              ref: "vueFileAgent",
+              attrs: {
+                accept: "video/*",
+                compact: true,
+                maxSize: "1GB",
+                meta: false,
+                multiple: false
               },
-              expression: "fileRecords"
-            }
-          })
-        ],
-        1
-      )
+              on: {
+                select: function($event) {
+                  return _vm.filesSelected($event)
+                }
+              },
+              model: {
+                value: _vm.fileRecords,
+                callback: function($$v) {
+                  _vm.fileRecords = $$v
+                },
+                expression: "fileRecords"
+              }
+            })
+          ],
+          1
+        )
+      ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -24444,7 +24475,7 @@ var render = function() {
         [
           _c("vue-file-agent", {
             attrs: {
-              accept: "image/*,video/*,.pdf,.doc,.docx",
+              accept: "image/*,.pdf,.doc,.docx",
               linkable: true,
               maxSize: "10MB",
               meta: false,

@@ -20,34 +20,33 @@ class UploadController extends Controller
      * String $request->type is optional, default is 'unlisted'
      * @return Response
      */
-    public function youtube(Request $request)
+    public function postYoutube(Request $request)
     {
-        // $path = $request->file('video')->store('videos');
-        $path = 'i5L9NGohoAE';
+        $yt_id = 'i5L9NGohoAE';
 
         if (config('filetinmel.env') != 'local') {
 
             $request->validate([
                 'title' => 'required|max:255',
-                'upload' => 'required',
+                'file' => 'required',
             ]);
 
             $video = $request->file('file');
             $title = $request->title;
-            $category_id = ($request->has('category_id')) ? $request->category_id : 22;
-            $type = ($request->has('type')) ? $request->type : 'unlisted';
+            $category_id = ($request->has('category_id')) ? $request->category_id : config('filetinmel.yt_default_category');
+            $type = ($request->has('type')) ? $request->type : config('filetinmel.yt_default_listing');
 
             $ytVideo = Youtube::upload($video, [
                 'title' => $title,
                 'category_id' => $category_id,
             ], $type);
-            $path = $ytVideo->getVideoId();
+            $yt_id = $ytVideo->getVideoId();
         }
 
-        return response()->json($path);
+        return response()->json($yt_id);
     }
 
-    public function upload(Request $request, $f = null)
+    public function postFiles(Request $request, $f = null)
     {
         $folder = ($f == null) ? config('filetinmel.s3_folder') : $f;
         $path = $request->file('file')->store($folder);
@@ -57,7 +56,7 @@ class UploadController extends Controller
         return response()->json($result);
     }
 
-    public function files(Request $request)
+    public function getFiles(Request $request)
     {
         foreach ($request->paths as $path) {
             if (Storage::exists($path)) {
