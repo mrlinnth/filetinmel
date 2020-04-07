@@ -3,18 +3,17 @@
         <p class="text-sm text-gray-300 text-center">Loading...</p>
     </div>
     <div v-else>
-      <div class="w-40">
-        <vue-file-agent
-          ref="vueFileAgent"
-          v-model="fileRecords"
-          accept="video/*"
-          :compact="true"
-          maxSize="1GB"
-          :meta="false"
-          :multiple="false"
-          @select="filesSelected($event)">
-        </vue-file-agent>
-      </div>
+        <div class="w-40">
+            <vue-file-agent
+            ref="vueFileAgent"
+            v-model="fileRecords"
+            accept="video/*"
+            :compact="true"
+            maxSize="1GB"
+            :meta="false"
+            :multiple="false"
+            @select="filesSelected($event)" />
+        </div>
     </div>
 </template>
 
@@ -37,6 +36,9 @@ export default {
       fileRecordsForUpload: []
     }
   },
+  mounted () {
+    this.fetchData()
+  },
   methods: {
     fetchData () {
       this.loading = false
@@ -56,18 +58,17 @@ export default {
         formData.append('title', this.title)
 
         const filesResponse = await axios.post(this.uploadUrl, formData)
-        const yt_id = filesResponse.data
+        this.processFiles(filesResponse.data)
 
-        // use the uploaded youtube video ID as you wish here
         this.fileRecordsForUpload = []
       } catch (e) {
         console.error('error', e)
       }
+    },
+    processFiles (files) {
+      // do something with return uploaded files data
+      console.log(files)
     }
-  },
-  mounted () {
-    console.log('single-file component mounted.')
-    this.fetchData()
   }
 }
 </script>

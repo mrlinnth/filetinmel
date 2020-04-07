@@ -1935,129 +1935,6 @@ module.exports = {
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/FtmTest.vue?vue&type=script&lang=js&":
-/*!*************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/FtmTest.vue?vue&type=script&lang=js& ***!
-  \*************************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vue_file_agent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-file-agent */ "./node_modules/vue-file-agent/dist/vue-file-agent.umd.js");
-/* harmony import */ var vue_file_agent__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_file_agent__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var vue_file_agent_dist_vue_file_agent_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-file-agent/dist/vue-file-agent.css */ "./node_modules/vue-file-agent/dist/vue-file-agent.css");
-/* harmony import */ var vue_file_agent_dist_vue_file_agent_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_file_agent_dist_vue_file_agent_css__WEBPACK_IMPORTED_MODULE_2__);
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  components: {
-    'vue-file-agent': vue_file_agent__WEBPACK_IMPORTED_MODULE_1___default.a.VueFileAgent
-  },
-  props: {
-    title: String
-  },
-  data: function data() {
-    return {
-      loading: true,
-      fileRecords: [],
-      uploadUrl: '/api/filetinmel/youtube',
-      fileRecordsForUpload: []
-    };
-  },
-  methods: {
-    fetchData: function fetchData() {
-      this.loading = false;
-    },
-    filesSelected: function filesSelected(fileRecordsNewlySelected) {
-      var validFileRecords = fileRecordsNewlySelected.filter(function (fileRecord) {
-        return !fileRecord.error;
-      });
-      this.fileRecordsForUpload = this.fileRecordsForUpload.concat(validFileRecords);
-      this.uploadFiles();
-    },
-    uploadFiles: function () {
-      var _uploadFiles = _asyncToGenerator(
-      /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var fileForUpload, formData, filesResponse, yt_id;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.prev = 0;
-                // axios upload
-                fileForUpload = this.fileRecordsForUpload[this.fileRecordsForUpload.length - 1];
-                formData = new FormData();
-                formData.append('file', fileForUpload.file);
-                formData.append('title', this.title);
-                _context.next = 7;
-                return axios.post(this.uploadUrl, formData);
-
-              case 7:
-                filesResponse = _context.sent;
-                yt_id = filesResponse.data; // use the uploaded youtube video ID as you wish here
-
-                this.fileRecordsForUpload = [];
-                _context.next = 15;
-                break;
-
-              case 12:
-                _context.prev = 12;
-                _context.t0 = _context["catch"](0);
-                console.error('error', _context.t0);
-
-              case 15:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee, this, [[0, 12]]);
-      }));
-
-      function uploadFiles() {
-        return _uploadFiles.apply(this, arguments);
-      }
-
-      return uploadFiles;
-    }()
-  },
-  mounted: function mounted() {
-    console.log('ftm-test component mounted.');
-    this.fetchData();
-  }
-});
-
-/***/ }),
-
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/MultipleFiles.vue?vue&type=script&lang=js&":
 /*!*******************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/MultipleFiles.vue?vue&type=script&lang=js& ***!
@@ -2095,7 +1972,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2106,10 +1982,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     return {
       loading: true,
       fileRecords: [],
+      uploadUrl: '/api/filetinmel/upload',
+      fileRecordsForUpload: [],
       payload: {
         paths: ['dummy.txt', 'dummy.png']
+      },
+      uploadHeader: {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
       }
     };
+  },
+  mounted: function mounted() {
+    this.fetchData();
   },
   methods: {
     fetchData: function () {
@@ -2152,13 +2038,65 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return fetchData;
     }(),
-    onUpload: function onUpload(response) {
-      console.log('response', response);
+    filesSelected: function filesSelected(fileRecordsNewlySelected) {
+      var validFileRecords = fileRecordsNewlySelected.filter(function (fileRecord) {
+        return !fileRecord.error;
+      });
+      this.fileRecordsForUpload = this.fileRecordsForUpload.concat(validFileRecords);
+      this.uploadFiles();
+    },
+    uploadFiles: function () {
+      var _uploadFiles = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var filesForUpload, formData, i, file, filesResponse;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.prev = 0;
+                // axios upload
+                filesForUpload = this.fileRecordsForUpload;
+                formData = new FormData();
+
+                for (i = 0; i < filesForUpload.length; i++) {
+                  file = filesForUpload[i].file;
+                  formData.append('files[' + i + ']', file);
+                }
+
+                _context2.next = 6;
+                return axios.post(this.uploadUrl, formData, this.uploadHeader);
+
+              case 6:
+                filesResponse = _context2.sent;
+                this.processFiles(filesResponse.data);
+                this.fileRecordsForUpload = [];
+                _context2.next = 14;
+                break;
+
+              case 11:
+                _context2.prev = 11;
+                _context2.t0 = _context2["catch"](0);
+                console.error('error', _context2.t0);
+
+              case 14:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this, [[0, 11]]);
+      }));
+
+      function uploadFiles() {
+        return _uploadFiles.apply(this, arguments);
+      }
+
+      return uploadFiles;
+    }(),
+    processFiles: function processFiles(files) {
+      // do something with return uploaded files data
+      console.log(files);
     }
-  },
-  mounted: function mounted() {
-    console.log('multiple-files component mounted.');
-    this.fetchData();
   }
 });
 
@@ -2204,7 +2142,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2222,6 +2159,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       fileRecordsForUpload: []
     };
   },
+  mounted: function mounted() {
+    this.fetchData();
+  },
   methods: {
     fetchData: function fetchData() {
       this.loading = false;
@@ -2237,7 +2177,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _uploadFiles = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var fileForUpload, formData, filesResponse, yt_id;
+        var fileForUpload, formData, filesResponse;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -2253,8 +2193,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 7:
                 filesResponse = _context.sent;
-                yt_id = filesResponse.data; // use the uploaded youtube video ID as you wish here
-
+                this.processFiles(filesResponse.data);
                 this.fileRecordsForUpload = [];
                 _context.next = 15;
                 break;
@@ -2277,11 +2216,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
 
       return uploadFiles;
-    }()
-  },
-  mounted: function mounted() {
-    console.log('single-file component mounted.');
-    this.fetchData();
+    }(),
+    processFiles: function processFiles(files) {
+      // do something with return uploaded files data
+      console.log(files);
+    }
   }
 });
 
@@ -2300,25 +2239,6 @@ exports = module.exports = __webpack_require__(/*! ../../css-loader/lib/css-base
 
 // module
 exports.push([module.i, ".vue-file-agent,.vue-file-agent *{\n  -webkit-box-sizing:border-box;\n  box-sizing:border-box\n}\n\n.is-drag-over *{\n  pointer-events:none!important\n}\n\n.is-drag-over:before{\n  content:\" \"\n}\n\n.is-disabled .vue-file-agent{\n  opacity:.65;\n  pointer-events:none\n}\n\n.grid-box-item{\n  -webkit-transition-duration:.6s;\n  transition-duration:.6s\n}\n\n.grid-box-enter,.grid-box-leave-to{\n  opacity:0!important;\n  -webkit-transform:translateZ(0) scale(.25)!important;\n  transform:translateZ(0) scale(.25)!important\n}\n\n.grid-box-leave-active{\n  position:absolute!important\n}\n\n.is-readonly .vue-file-agent.file-input-wrapper{\n  border:0\n}\n\n.vue-file-agent .file-preview-wrapper{\n  display:inline-block;\n  margin:5px;\n  position:relative;\n  vertical-align:top;\n  margin:16px;\n  margin:8px\n}\n\n.vue-file-agent .file-preview-wrapper:before{\n  content:\" \";\n  position:absolute;\n  left:0;\n  top:0;\n  right:0;\n  bottom:0;\n  background:rgba(0,0,0,.25)\n}\n\n.vue-file-agent .file-category-video-playable .file-preview .file-preview-overlay,.vue-file-agent .file-preview-wrapper-image .file-preview .file-preview-overlay{\n  content:\" \";\n  background:rgba(0,0,0,.25);\n  position:absolute;\n  top:0;\n  right:0;\n  bottom:0;\n  left:0;\n  z-index:-1\n}\n\n.vue-file-agent .file-category-video-playable .file-preview:before,.vue-file-agent .file-preview-wrapper-image .file-preview:before{\n  -webkit-box-shadow:inset 0 40px 20px -25px rgba(0,0,0,.5);\n  box-shadow:inset 0 40px 20px -25px rgba(0,0,0,.5);\n  height:40px\n}\n\n.vue-file-agent .file-category-video-playable .file-preview:after,.vue-file-agent .file-preview-wrapper-image .file-preview:after{\n  -webkit-box-shadow:inset 0 -40px 20px -25px rgba(0,0,0,.5);\n  box-shadow:inset 0 -40px 20px -25px rgba(0,0,0,.5);\n  height:40px\n}\n\n.vue-file-agent .file-category-audio-playable .file-preview .file-icon,.vue-file-agent .file-category-video-playable .file-preview .file-icon,.vue-file-agent .file-preview-wrapper-image .file-preview .file-icon{\n  display:none\n}\n\n.vue-file-agent .file-category-video-playable .file-preview .file-preview-overlay{\n  z-index:1\n}\n\n.vue-file-agent .file-preview-wrapper-image .file-preview.dark-content .file-preview-overlay{\n  background:hsla(0,0%,100%,.25)\n}\n\n.vue-file-agent .file-preview{\n  position:relative;\n  z-index:1;\n  float:left;\n  display:-webkit-box;\n  display:-ms-flexbox;\n  display:flex;\n  -webkit-box-align:center;\n  -ms-flex-align:center;\n  align-items:center;\n  -webkit-box-pack:center;\n  -ms-flex-pack:center;\n  justify-content:center;\n  z-index:9\n}\n\n.vue-file-agent .file-preview:after,.vue-file-agent .file-preview:before{\n  content:\" \";\n  position:absolute;\n  left:0;\n  top:0;\n  right:0;\n  bottom:0;\n  z-index:2;\n  top:auto;\n  height:25px\n}\n\n.vue-file-agent .file-preview:before{\n  height:28px;\n  top:0;\n  bottom:auto\n}\n\n.vue-file-agent .file-preview .file-preview-img{\n  max-width:100%;\n  max-height:100%;\n  background:url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\"><rect x=\"0\" y=\"0\" width=\"100%\" height=\"100%\" fill=\"rgba(255, 255, 255, 0.1)\" /><rect x=\"50%\" y=\"0\" width=\"50%\" height=\"50%\" fill=\"rgba(0, 0, 0, 0.075)\" /><rect x=\"0\" y=\"50%\" width=\"50%\" height=\"50%\" fill=\"rgba(0, 0, 0, 0.075)\" /></svg>');\n  background-repeat:repeat;\n  position:absolute;\n  left:50%;\n  top:50%;\n  -webkit-transform:translate(-50%,-50%);\n  transform:translate(-50%,-50%)\n}\n\n.vue-file-agent .file-preview .file-preview-img-clone{\n  position:absolute;\n  top:0;\n  right:0;\n  bottom:0;\n  left:0;\n  -o-object-fit:cover;\n  object-fit:cover;\n  -webkit-filter:blur(10px);\n  filter:blur(10px);\n  height:100%;\n  width:100%\n}\n\n.vue-file-agent .file-preview .file-name{\n  position:absolute;\n  top:0;\n  left:0;\n  right:0;\n  padding:0 5px;\n  z-index:4;\n  text-align:center;\n  white-space:nowrap;\n  overflow:hidden;\n  text-overflow:ellipsis;\n  line-height:28px;\n  height:28px;\n  font-size:16px\n}\n\n.vue-file-agent .file-preview .file-delete{\n  cursor:pointer;\n  position:absolute;\n  right:0;\n  top:0;\n  padding:0;\n  font-size:16px;\n  background:transparent;\n  height:28px;\n  width:22px;\n  display:block;\n  color:#fff;\n  color:hsla(0,0%,100%,.75);\n  z-index:5\n}\n\n.vue-file-agent .file-preview .file-delete svg{\n  width:1em;\n  height:1em;\n  fill:currentColor;\n  vertical-align:middle\n}\n\n.vue-file-agent .file-preview .file-icon{\n  z-index:455;\n  position:absolute;\n  top:50%;\n  height:72px;\n  width:72px;\n  margin-top:-36px;\n  left:50%;\n  margin-left:-36px\n}\n\n.vue-file-agent .file-preview .file-icon svg{\n  width:72px;\n  height:72px;\n  fill:#fff\n}\n\n.vue-file-agent .file-preview .file-ext{\n  text-align:left;\n  left:0;\n  z-index:3\n}\n\n.vue-file-agent .file-preview .file-ext,.vue-file-agent .file-preview .file-size{\n  position:absolute;\n  font-size:16px;\n  text-transform:uppercase;\n  display:block;\n  right:0;\n  bottom:0;\n  line-height:25px;\n  padding:0 5px\n}\n\n.vue-file-agent .file-preview .file-size{\n  text-align:right;\n  z-index:4\n}\n\n.vue-file-agent .file-preview .image-dimension .image-dimension-height,.vue-file-agent .file-preview .image-dimension .image-dimension-width{\n  display:inline-block\n}\n\n.vue-file-agent .file-preview .image-dimension .image-dimension-width:after{\n  content:\"x\"\n}\n\n.vue-file-agent .file-preview .image-dimension{\n  position:absolute;\n  font-size:12px;\n  text-align:center;\n  display:block;\n  width:100%;\n  right:0;\n  bottom:0;\n  line-height:25px;\n  padding:0 5px;\n  z-index:4\n}\n\n.vue-file-agent .file-preview .file-ext,.vue-file-agent .file-preview .file-name,.vue-file-agent .file-preview .file-size,.vue-file-agent .file-preview .image-dimension,.vue-file-agent .file-preview .image-dimension .image-dimension-width:after{\n  color:#fff\n}\n\n.vue-file-agent.has-multiple .file-preview,.vue-file-agent.is-single .is-deletable .file-preview{\n  z-index:11\n}\n\n.vue-file-agent .is-deletable .file-preview .file-name{\n  padding-right:20px\n}\n\n.vue-file-agent.no-meta .file-preview .file-ext,.vue-file-agent.no-meta .file-preview .file-name,.vue-file-agent.no-meta .file-preview .file-size,.vue-file-agent.no-meta .file-preview .image-dimension,.vue-file-agent.no-meta .file-preview:after{\n  display:none\n}\n\n.vue-file-agent .file-preview-new{\n  text-align:center;\n  padding:8px;\n  z-index:1\n}\n\n.vue-file-agent .file-preview-new:before{\n  background:rgba(0,0,0,.05)\n}\n\n.vue-file-agent .file-preview-new svg{\n  fill:#aaa;\n  margin-top:16%;\n  height:36%\n}\n\n.vue-file-agent .file-preview-new .help-text{\n  color:#aaa;\n  text-align:center;\n  font-size:16px;\n  line-height:20px;\n  height:20px;\n  display:block\n}\n\n.vue-file-agent .file-preview-new .file-preview{\n  z-index:8\n}\n\n.vue-file-agent .file-preview-new .file-preview:after,.vue-file-agent .file-preview-new .file-preview:before{\n  display:none\n}\n\n.vue-file-agent .file-av-wrapper .file-av-action{\n  width:60px;\n  height:60px;\n  left:50%;\n  position:absolute;\n  top:50%;\n  margin-top:-30px;\n  margin-left:-30px;\n  background:transparent;\n  border-radius:50%;\n  z-index:800;\n  cursor:pointer\n}\n\n.vue-file-agent .file-av-wrapper .file-av-play,.vue-file-agent .file-av-wrapper .file-av-stop{\n  width:50%;\n  height:50%;\n  position:absolute;\n  left:25%;\n  top:25%;\n  display:none\n}\n\n.vue-file-agent .file-av-wrapper .file-av-play{\n  height:60%;\n  width:60%;\n  left:20%;\n  top:20%;\n  display:block\n}\n\n.vue-file-agent .file-av-wrapper .file-av-play svg,.vue-file-agent .file-av-wrapper .file-av-stop svg{\n  fill:#fff;\n  width:100%;\n  height:100%\n}\n\n.vue-file-agent .file-av-wrapper audio,.vue-file-agent .file-av-wrapper video{\n  position:absolute;\n  left:0;\n  right:0;\n  z-index:799;\n  top:0;\n  bottom:0;\n  width:100%;\n  height:100%;\n  background:rgba(0,0,0,.75)\n}\n\n.vue-file-agent .file-is-playing-av .file-av-wrapper .file-av-stop{\n  display:block\n}\n\n.vue-file-agent .file-is-playing-av .file-av-wrapper .file-av-play{\n  display:none\n}\n\n.vue-file-agent .file-progress{\n  display:block;\n  height:3px;\n  z-index:3;\n  position:absolute;\n  left:0;\n  right:0;\n  overflow:hidden;\n  top:32px;\n  top:1px;\n  top:0;\n  height:28px;\n  height:4px;\n  margin-top:1px;\n  margin-left:1px;\n  margin-right:1px\n}\n\n.vue-file-agent .file-progress .file-progress-bar{\n  background:#fac525;\n  display:block;\n  height:100%;\n  -webkit-transition:all .1s;\n  transition:all .1s;\n  width:0\n}\n\n.vue-file-agent .file-progress.has-file-progress{\n  background:hsla(0,0%,100%,.5);\n  -webkit-box-shadow:0 2px 10px -1px rgba(0,0,0,.75);\n  box-shadow:0 2px 10px -1px rgba(0,0,0,.75)\n}\n\n.vue-file-agent .file-progress.file-progress-full .file-progress-bar{\n  background:#54d500\n}\n\n.vue-file-agent .file-progress.file-progress-done{\n  width:5px!important;\n  height:5px!important;\n  right:0!important;\n  left:auto!important;\n  border-radius:50%;\n  -webkit-box-shadow:-1px 1px 2px 0 rgba(0,0,0,.75);\n  box-shadow:-1px 1px 2px 0 rgba(0,0,0,.75)\n}\n\n.vue-file-agent .file-progress.file-progress-done .file-progress-bar{\n  background:#54d500\n}\n\n.vue-file-agent .file-input{\n  position:absolute;\n  top:0;\n  right:0;\n  bottom:0;\n  left:0;\n  width:100%;\n  height:100%;\n  opacity:0;\n  z-index:10;\n  cursor:pointer\n}\n\n.vue-file-agent.file-input-wrapper{\n  position:relative;\n  border:2px dashed #aaa;\n  text-align:center;\n  -webkit-transition:all .6s;\n  transition:all .6s\n}\n\n.is-drag-over .vue-file-agent.file-input-wrapper,.vue-file-agent.file-input-wrapper.is-drag-over{\n  border-color:#f61a1a;\n  -webkit-box-shadow:inset 0 0 20px 1px #f61a1a;\n  box-shadow:inset 0 0 20px 1px #f61a1a\n}\n\n.is-drag-valid.is-drag-over .vue-file-agent.file-input-wrapper,.vue-file-agent.file-input-wrapper.is-drag-valid.is-drag-over{\n  border-color:#54d500;\n  -webkit-box-shadow:inset 0 0 20px 1px #54d500;\n  box-shadow:inset 0 0 20px 1px #54d500\n}\n\n.vue-file-agent .file-error-wrapper{\n  position:absolute;\n  left:0;\n  right:0;\n  color:#fff;\n  bottom:25px;\n  z-index:900;\n  padding:10px;\n  top:28px;\n  font-size:14px;\n  display:-webkit-box;\n  display:-ms-flexbox;\n  display:flex;\n  -webkit-box-align:center;\n  -ms-flex-align:center;\n  align-items:center\n}\n\n.vue-file-agent .file-error-wrapper .file-error-message{\n  background:#ea2626;\n  width:100%;\n  height:auto;\n  color:#fff;\n  padding:0 5px\n}\n\n.vue-file-agent .is-editable .file-name{\n  cursor:pointer\n}\n\n.vue-file-agent .is-editable .file-name .file-name-input{\n  color:inherit;\n  background:transparent;\n  font-weight:inherit;\n  padding:inherit;\n  margin:inherit;\n  border:0;\n  outline:0;\n  position:absolute;\n  left:0;\n  width:100%;\n  text-align:inherit;\n  opacity:0;\n  z-index:-5\n}\n\n.vue-file-agent .is-editable .file-name .file-name-edit-icon svg{\n  height:1em;\n  width:1em;\n  margin-right:2px;\n  opacity:.5;\n  fill:currentColor;\n  vertical-align:middle;\n  margin-top:-2px\n}\n\n.vue-file-agent .is-editable.is-edit-input-focused .file-name{\n  border-bottom:1px solid currentColor\n}\n\n.vue-file-agent .is-editable.is-edit-input-focused .file-name .file-name-edit-icon,.vue-file-agent .is-editable.is-edit-input-focused .file-name .file-name-text{\n  display:none\n}\n\n.vue-file-agent .is-editable.is-edit-input-focused .file-name .file-name-input{\n  opacity:1;\n  z-index:2\n}\n\n.is-sorting .vue-file-agent .active-sorting-item,.is-sorting .vue-file-agent .file-preview-wrapper{\n  -webkit-transition-duration:0s;\n  transition-duration:0s\n}\n\n.is-sorting-active .vue-file-agent .file-preview-wrapper{\n  opacity:.75\n}\n\n.is-sorting-active .vue-file-agent .active-sorting-item{\n  opacity:1\n}\n\n.is-sortable-immediately .vue-file-agent .file-preview-wrapper,.is-sortable-immediately .vue-file-agent .file-preview-wrapper *{\n  cursor:move\n}\n\n.vue-file-agent .file-preview-wrapper .file-sortable-handle{\n  position:absolute;\n  z-index:900;\n  cursor:move;\n  border-radius:50%;\n  background:hsla(0,0%,100%,.95);\n  color:#222;\n  margin:0;\n  width:33px;\n  height:33px;\n  left:5px;\n  top:5px;\n  padding:4px\n}\n\n.vue-file-agent .file-preview-wrapper .file-sortable-handle svg{\n  fill:currentColor;\n  width:100%;\n  height:100%;\n  vertical-align:top\n}\n\n.grid-block-wrapper .grid-block{\n  width:50%;\n  border:1px solid transparent;\n  margin:0!important;\n  min-width:156px\n}\n\n.grid-block-wrapper{\n  padding:2px\n}\n\n.grid-block-wrapper .grid-block .file-preview{\n  width:100%;\n  height:0;\n  padding-bottom:75%;\n  padding-bottom:100%\n}\n\n.is-readonly .grid-block-wrapper{\n  padding:0;\n  margin:-1px\n}\n\n@media (min-width:576px){\n  .grid-block-wrapper .grid-block{\n    width:33.3333%;\n    border-width:2px\n  }\n\n  .grid-block-wrapper{\n    padding:2px\n  }\n\n  .is-readonly .grid-block-wrapper{\n    padding:0;\n    margin:-2px\n  }\n}\n\n@media (min-width:768px){\n  .grid-block-wrapper .grid-block{\n    width:25%\n  }\n}\n\n@media (min-width:992px){\n  .grid-block-wrapper .grid-block{\n    width:20%\n  }\n}\n\n@media (min-width:1200px){\n  .grid-block-wrapper .grid-block{\n    width:16.6666%\n  }\n}\n\n@media (min-width:1440px){\n  .grid-block-wrapper .grid-block{\n    width:16.6666%\n  }\n}\n\n.grid-block-wrapper.is-compact .grid-block,.theme-list .vue-file-agent .file-preview-wrapper{\n  width:100%\n}\n\n.theme-list .vue-file-agent .file-preview-wrapper .file-preview{\n  height:53px;\n  padding:0\n}\n\n.theme-list .vue-file-agent .file-preview-wrapper .file-preview:after,.theme-list .vue-file-agent .file-preview-wrapper .file-preview:before{\n  -webkit-box-shadow:none;\n  box-shadow:none\n}\n\n.theme-list .vue-file-agent .file-preview-wrapper .file-preview:before{\n  background:#dcdcdf;\n  left:53px;\n  right:0;\n  top:0;\n  bottom:0;\n  height:100%\n}\n\n.theme-list .vue-file-agent .file-preview-wrapper .file-preview .file-icon,.theme-list .vue-file-agent .file-preview-wrapper .file-preview .thumbnail{\n  width:100%;\n  left:0;\n  margin:0;\n  top:0;\n  bottom:0;\n  height:100%;\n  width:53px\n}\n\n.theme-list .vue-file-agent .file-preview-wrapper .file-preview .thumbnail{\n  z-index:12\n}\n\n.theme-list .vue-file-agent .file-preview-wrapper .file-preview .file-icon svg{\n  height:46px;\n  width:46px;\n  margin-top:4px\n}\n\n.theme-list .vue-file-agent .file-preview-wrapper .file-preview .file-progress{\n  z-index:2;\n  top:0;\n  right:0;\n  bottom:0;\n  -webkit-box-shadow:none;\n  box-shadow:none\n}\n\n.theme-list .vue-file-agent .file-preview-wrapper .file-preview .file-ext,.theme-list .vue-file-agent .file-preview-wrapper .file-preview .file-name{\n  background:transparent\n}\n\n.theme-list .vue-file-agent .file-preview-wrapper .file-preview .file-ext,.theme-list .vue-file-agent .file-preview-wrapper .file-preview .file-name,.theme-list .vue-file-agent .file-preview-wrapper .file-preview .file-progress{\n  left:53px;\n  text-align:left;\n  color:#333\n}\n\n.theme-list .vue-file-agent .file-preview-wrapper .file-preview .file-size{\n  color:#333\n}\n\n.theme-list .vue-file-agent .file-preview-wrapper .file-preview .file-name{\n  font-weight:700\n}\n\n.theme-list .vue-file-agent .file-preview-wrapper .file-preview .file-delete{\n  color:#e55353;\n  color:#777;\n  background:transparent\n}\n\n.theme-list .vue-file-agent .file-preview-wrapper .file-preview .image-dimension{\n  left:53px;\n  text-align:left;\n  margin-left:53px;\n  right:auto;\n  width:auto\n}\n\n.theme-list .vue-file-agent .file-preview-wrapper .file-preview .image-dimension,.theme-list .vue-file-agent .file-preview-wrapper .file-preview .image-dimension .image-dimension-width:after{\n  color:#666\n}\n\n.theme-list .vue-file-agent .file-preview-wrapper .file-error-wrapper{\n  top:0;\n  left:0;\n  bottom:0;\n  padding:5px;\n  left:53px;\n  text-align:left;\n  height:100%;\n  color:#ea2626;\n  font-weight:700;\n  background:transparent;\n  display:block\n}\n\n.theme-list .vue-file-agent .file-preview-wrapper.is-deletable .file-error-wrapper{\n  right:17px\n}\n\n.theme-list .vue-file-agent .file-preview-wrapper .file-sortable-handle{\n  margin:0;\n  left:10px;\n  top:10px\n}\n\n.theme-list .vue-file-agent .file-preview-new{\n  padding:0\n}\n\n.theme-list .vue-file-agent .file-preview-new svg{\n  height:36px;\n  width:36px;\n  margin:0;\n  position:absolute;\n  left:10px;\n  top:8px\n}\n\n.theme-list .vue-file-agent .file-preview-new .help-text{\n  padding:5px;\n  text-align:left;\n  position:absolute;\n  top:0;\n  left:53px;\n  display:-webkit-box;\n  display:-ms-flexbox;\n  display:flex;\n  -webkit-box-align:center;\n  -ms-flex-align:center;\n  align-items:center;\n  right:0;\n  bottom:0;\n  height:100%\n}\n\n.theme-list .vue-file-agent .file-av-wrapper .file-av-action{\n  width:53px;\n  height:53px;\n  margin:0;\n  left:0;\n  top:0\n}\n\n.theme-list .vue-file-agent .file-av-wrapper .file-av-play,.theme-list .vue-file-agent .file-av-wrapper .file-av-stop{\n  width:50%;\n  height:50%;\n  position:absolute;\n  left:25%;\n  top:25%\n}\n\n.theme-list .grid-box-enter,.theme-list .grid-box-leave-to{\n  -webkit-transform:translate3d(0,-20px,0)!important;\n  transform:translate3d(0,-20px,0)!important;\n  opacity:0!important\n}\n\n.theme-list .grid-box-leave-active{\n  position:absolute!important;\n  left:0!important\n}\n\n.theme-list .grid-block-wrapper .grid-block{\n  border-width:2px\n}\n\n.theme-list.is-readonly .grid-block-wrapper{\n  padding:0;\n  margin:-2px\n}", ""]);
-
-// exports
-
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/FtmTest.vue?vue&type=style&index=0&lang=css&":
-/*!********************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/FtmTest.vue?vue&type=style&index=0&lang=css& ***!
-  \********************************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, ".foo {\n  color: #4a5568;\n}\n", ""]);
 
 // exports
 
@@ -20696,36 +20616,6 @@ try {
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/FtmTest.vue?vue&type=style&index=0&lang=css&":
-/*!************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/FtmTest.vue?vue&type=style&index=0&lang=css& ***!
-  \************************************************************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-var content = __webpack_require__(/*! !../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./FtmTest.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/FtmTest.vue?vue&type=style&index=0&lang=css&");
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(/*! ../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {}
-
-/***/ }),
-
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/MultipleFiles.vue?vue&type=style&index=0&lang=css&":
 /*!******************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/MultipleFiles.vue?vue&type=style&index=0&lang=css& ***!
@@ -24485,66 +24375,6 @@ var FileData = file_record; // for backward compatibility
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/FtmTest.vue?vue&type=template&id=264fea2a&":
-/*!*****************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/FtmTest.vue?vue&type=template&id=264fea2a& ***!
-  \*****************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _vm.loading
-    ? _c("div", [
-        _c("p", { staticClass: "text-sm text-gray-300 text-center" }, [
-          _vm._v("Loading...")
-        ])
-      ])
-    : _c("div", [
-        _c(
-          "div",
-          { staticClass: "w-40" },
-          [
-            _c("vue-file-agent", {
-              ref: "vueFileAgent",
-              attrs: {
-                accept: "video/*",
-                compact: true,
-                maxSize: "1GB",
-                meta: false,
-                multiple: false
-              },
-              on: {
-                select: function($event) {
-                  return _vm.filesSelected($event)
-                }
-              },
-              model: {
-                value: _vm.fileRecords,
-                callback: function($$v) {
-                  _vm.fileRecords = $$v
-                },
-                expression: "fileRecords"
-              }
-            })
-          ],
-          1
-        )
-      ])
-}
-var staticRenderFns = []
-render._withStripped = true
-
-
-
-/***/ }),
-
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/MultipleFiles.vue?vue&type=template&id=0f4dabc0&":
 /*!***********************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/MultipleFiles.vue?vue&type=template&id=0f4dabc0& ***!
@@ -24570,16 +24400,16 @@ var render = function() {
         "div",
         [
           _c("vue-file-agent", {
+            ref: "vueFileAgent",
             attrs: {
               accept: "image/*,.pdf,.doc,.docx",
               linkable: true,
               maxSize: "10MB",
-              meta: false,
-              uploadUrl: "/api/filetinmel/upload"
+              meta: false
             },
             on: {
-              upload: function($event) {
-                return _vm.onUpload($event)
+              select: function($event) {
+                return _vm.filesSelected($event)
               }
             },
             model: {
@@ -36853,98 +36683,9 @@ if (token) {
   console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
 
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('ftm-test', __webpack_require__(/*! ./components/FtmTest.vue */ "./resources/assets/js/components/FtmTest.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('single-file', __webpack_require__(/*! ./components/SingleFile.vue */ "./resources/assets/js/components/SingleFile.vue")["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('multiple-files', __webpack_require__(/*! ./components/MultipleFiles.vue */ "./resources/assets/js/components/MultipleFiles.vue")["default"]); // Vue.component('ftm-plans-table', require('./components/PlansTable.vue').default)
-
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('multiple-files', __webpack_require__(/*! ./components/MultipleFiles.vue */ "./resources/assets/js/components/MultipleFiles.vue")["default"]);
 new vue__WEBPACK_IMPORTED_MODULE_0___default.a().$mount('#app');
-
-/***/ }),
-
-/***/ "./resources/assets/js/components/FtmTest.vue":
-/*!****************************************************!*\
-  !*** ./resources/assets/js/components/FtmTest.vue ***!
-  \****************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _FtmTest_vue_vue_type_template_id_264fea2a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FtmTest.vue?vue&type=template&id=264fea2a& */ "./resources/assets/js/components/FtmTest.vue?vue&type=template&id=264fea2a&");
-/* harmony import */ var _FtmTest_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FtmTest.vue?vue&type=script&lang=js& */ "./resources/assets/js/components/FtmTest.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _FtmTest_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./FtmTest.vue?vue&type=style&index=0&lang=css& */ "./resources/assets/js/components/FtmTest.vue?vue&type=style&index=0&lang=css&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
-  _FtmTest_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _FtmTest_vue_vue_type_template_id_264fea2a___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _FtmTest_vue_vue_type_template_id_264fea2a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/assets/js/components/FtmTest.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/assets/js/components/FtmTest.vue?vue&type=script&lang=js&":
-/*!*****************************************************************************!*\
-  !*** ./resources/assets/js/components/FtmTest.vue?vue&type=script&lang=js& ***!
-  \*****************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FtmTest_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./FtmTest.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/FtmTest.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FtmTest_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/assets/js/components/FtmTest.vue?vue&type=style&index=0&lang=css&":
-/*!*************************************************************************************!*\
-  !*** ./resources/assets/js/components/FtmTest.vue?vue&type=style&index=0&lang=css& ***!
-  \*************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_FtmTest_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader!../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./FtmTest.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/FtmTest.vue?vue&type=style&index=0&lang=css&");
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_FtmTest_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_FtmTest_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_FtmTest_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_FtmTest_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_FtmTest_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
-
-/***/ }),
-
-/***/ "./resources/assets/js/components/FtmTest.vue?vue&type=template&id=264fea2a&":
-/*!***********************************************************************************!*\
-  !*** ./resources/assets/js/components/FtmTest.vue?vue&type=template&id=264fea2a& ***!
-  \***********************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FtmTest_vue_vue_type_template_id_264fea2a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./FtmTest.vue?vue&type=template&id=264fea2a& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/FtmTest.vue?vue&type=template&id=264fea2a&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FtmTest_vue_vue_type_template_id_264fea2a___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FtmTest_vue_vue_type_template_id_264fea2a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
 
 /***/ }),
 

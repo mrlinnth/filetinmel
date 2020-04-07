@@ -16,9 +16,7 @@ if (token) {
   console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token')
 }
 
-Vue.component('ftm-test', require('./components/FtmTest.vue').default)
 Vue.component('single-file', require('./components/SingleFile.vue').default)
 Vue.component('multiple-files', require('./components/MultipleFiles.vue').default)
-// Vue.component('ftm-plans-table', require('./components/PlansTable.vue').default)
 
 new Vue().$mount('#app')
