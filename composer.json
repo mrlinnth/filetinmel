@@ -34,7 +34,7 @@
     "repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/mrlinnth/youtube"
+            "url": "git@github.com:mrlinnth/youtube.git"
         }
     ]
 }
