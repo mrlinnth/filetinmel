@@ -49,9 +49,12 @@ class UploadController extends Controller
     public function postFiles(Request $request, $f = null)
     {
         $folder = ($f == null) ? config('filetinmel.s3_folder') : $f;
-        $path = $request->file('file')->store($folder);
 
-        $result = Filetinmel::getFileMeta($path);
+        $result = [];
+        foreach ($request->file('files') as $file) {
+            $path = $file->store($folder);
+            $result[] = Filetinmel::getFileMeta($path);
+        }
 
         return response()->json($result);
     }
@@ -71,17 +74,18 @@ class UploadController extends Controller
     public function temp()
     {
         $result = [
-            "portfolio_img/1521603389_0zEZR0uowU.jpeg",
-            "portfolio_img/1521603393_9DthZiszIf.jpeg",
-            "portfolio_img/1521603396_VR75luWt1k.jpeg",
-            "portfolio_img/1521603396_yIs2ffL9i5.jpeg",
-            "portfolio_img/1521603397_5Q9oCFKtyx.jpeg",
-            "portfolio_img/1521603397_ir7SIYrYZm.jpeg",
-            "portfolio_img/1521603398_szbtoTWPEJ.jpeg",
-            "portfolio_img/1521603399_v6ufNARoBv.jpeg",
-            "portfolio_img/1521603399_h7DEvo6WXk.jpeg",
-            "portfolio_img/1521603400_5pqIlEUcq7.jpeg",
-            "portfolio_img/1521603401_0nOoTUdFX5.jpeg",
+            "portfolio_img/1483491984oKMOaRt721.jpg",
+            "portfolio_img/1483491984p05vs2s595.jpg",
+            "portfolio_img/1483491984gAMo6RqIP8.jpg",
+            "portfolio_img/1483491984HaUQMldyxQ.jpg",
+            "portfolio_img/1483491984DUTJaSjI31.jpg",
+            "portfolio_img/1483491984kMk7IFsr2B.jpg",
+            "portfolio_img/1490076106_MLZ8HzeEZY.jpeg",
+            "portfolio_img/1490076183_MhryQW9r7j.jpeg",
+            "portfolio_img/1490076310_YHs7cXb4TO.jpeg",
+            "portfolio_img/1490076360_5VYBq2aVWt.jpeg",
+            "portfolio_img/1490078652_dj7EhiGCQ1.jpeg",
+            "portfolio_img/1490078655_hd3BuFVayC.jpeg",
         ];
 
         return response()->json($result);
