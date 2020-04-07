@@ -49,7 +49,7 @@ export default {
     },
     async uploadFiles () {
       try {
-      // axios upload
+        // axios upload
         const fileForUpload = this.fileRecordsForUpload[this.fileRecordsForUpload.length - 1]
         const formData = new FormData()
         formData.append('file', fileForUpload.file)
@@ -66,7 +66,7 @@ export default {
     }
   },
   mounted () {
-    console.log('ftm-test component mounted.')
+    console.log('single-file component mounted.')
     this.fetchData()
   }
 }

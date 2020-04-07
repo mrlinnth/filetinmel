@@ -52,6 +52,10 @@ class FiletinmelServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(dirname(__DIR__) . '/publishable/config/filetinmel.php', 'filetinmel');
+
+        $this->app->singleton('filetinmel', function ($app) {
+            return new Filetinmel($app);
+        });
     }
 
     /**
