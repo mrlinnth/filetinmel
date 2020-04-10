@@ -2,11 +2,11 @@
 
 namespace Mrlinnth\Filetinmel\Http\Controllers\Api;
 
-use Dawson\Youtube\Facades\Youtube;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Storage;
+use Mrlinnth\Filetinmel\Facades\Youtube;
 use Mrlinnth\Filetinmel\Filetinmel;
 
 class UploadController extends Controller
@@ -24,7 +24,7 @@ class UploadController extends Controller
     {
         $yt_id = 'FMt3E4-fn9o';
 
-        if (config('filetinmel.env') != 'local') {
+        if (!config('youtube.testing')) {
 
             $request->validate([
                 'title' => 'required|max:255',
