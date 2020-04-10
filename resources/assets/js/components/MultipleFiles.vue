@@ -8,7 +8,7 @@
         v-model="fileRecords"
         accept="image/*,.pdf,.doc,.docx"
         :linkable="true"
-        maxSize="10MB"
+        maxSize="100MB"
         :meta="false"
         @select="filesSelected($event)" />
     </div>
@@ -21,6 +21,10 @@ import VueFileAgentStyles from 'vue-file-agent/dist/vue-file-agent.css'
 export default {
   components: {
     'vue-file-agent': VueFileAgentPlugin.VueFileAgent
+  },
+  props: {
+    files: Array,
+    folder: String
   },
   data () {
     return {

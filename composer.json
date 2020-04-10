@@ -8,7 +8,7 @@
         "php": "^7.2.0",
         "illuminate/database": "^6.0.0",
         "illuminate/support": "^6.0.0",
-        "mrlinnth/youtube" : "dev-master",
+        "google/apiclient": "^2.2",
         "ralouphie/mimey": "dev-master"
     },
     "require-dev": {
@@ -30,11 +30,5 @@
                 "Filetinmel": "Mrlinnth\\Filetinmel\\Facades\\Filetinmel"
             }
         }
-    },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "git@github.com:mrlinnth/youtube.git"
-        }
-    ]
+    }
 }

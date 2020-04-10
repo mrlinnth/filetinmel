@@ -1978,6 +1978,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   components: {
     'vue-file-agent': vue_file_agent__WEBPACK_IMPORTED_MODULE_1___default.a.VueFileAgent
   },
+  props: {
+    files: Array,
+    folder: String
+  },
   data: function data() {
     return {
       loading: true,
@@ -2142,6 +2146,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2156,7 +2162,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       loading: true,
       fileRecords: [],
       uploadUrl: '/api/filetinmel/youtube',
-      fileRecordsForUpload: []
+      fileRecordsForUpload: [],
+      uploading: false,
+      youtube_id: null
     };
   },
   mounted: function mounted() {
@@ -2177,38 +2185,40 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _uploadFiles = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var fileForUpload, formData, filesResponse;
+        var fileForUpload, formData, uploadResponse;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.prev = 0;
-                // axios upload
+                this.uploading = true; // axios upload
+
                 fileForUpload = this.fileRecordsForUpload[this.fileRecordsForUpload.length - 1];
                 formData = new FormData();
                 formData.append('file', fileForUpload.file);
                 formData.append('title', this.title);
-                _context.next = 7;
+                _context.next = 8;
                 return axios.post(this.uploadUrl, formData);
 
-              case 7:
-                filesResponse = _context.sent;
-                this.processFiles(filesResponse.data);
+              case 8:
+                uploadResponse = _context.sent;
+                this.afterUpload(uploadResponse.data);
+                this.uploading = false;
                 this.fileRecordsForUpload = [];
-                _context.next = 15;
+                _context.next = 17;
                 break;
 
-              case 12:
-                _context.prev = 12;
+              case 14:
+                _context.prev = 14;
                 _context.t0 = _context["catch"](0);
                 console.error('error', _context.t0);
 
-              case 15:
+              case 17:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this, [[0, 12]]);
+        }, _callee, this, [[0, 14]]);
       }));
 
       function uploadFiles() {
@@ -2217,9 +2227,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return uploadFiles;
     }(),
-    processFiles: function processFiles(files) {
+    afterUpload: function afterUpload(data) {
       // do something with return uploaded files data
-      console.log(files);
+      this.youtube_id = data;
     }
   }
 });
@@ -24404,7 +24414,7 @@ var render = function() {
             attrs: {
               accept: "image/*,.pdf,.doc,.docx",
               linkable: true,
-              maxSize: "10MB",
+              maxSize: "100MB",
               meta: false
             },
             on: {
@@ -24481,7 +24491,22 @@ var render = function() {
             })
           ],
           1
-        )
+        ),
+        _vm._v(" "),
+        _vm.uploading
+          ? _c("p", [
+              _vm._v("Uploading in progress. Do not close this browser tab.")
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.youtube_id
+          ? _c("p", [
+              _vm._v(
+                "Youtube URL : https://youtube.com/watch?v=" +
+                  _vm._s(_vm.youtube_id)
+              )
+            ])
+          : _vm._e()
       ])
 }
 var staticRenderFns = []
@@ -36870,8 +36895,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/yan/www/laravel/laravel6/packages/mrlinnth/filetinmel/resources/assets/js/app.js */"./resources/assets/js/app.js");
-module.exports = __webpack_require__(/*! /home/yan/www/laravel/laravel6/packages/mrlinnth/filetinmel/resources/assets/css/app.css */"./resources/assets/css/app.css");
+__webpack_require__(/*! /home/yan/www/packages/mrlinnth/filetinmel/resources/assets/js/app.js */"./resources/assets/js/app.js");
+module.exports = __webpack_require__(/*! /home/yan/www/packages/mrlinnth/filetinmel/resources/assets/css/app.css */"./resources/assets/css/app.css");
 
 
 /***/ })

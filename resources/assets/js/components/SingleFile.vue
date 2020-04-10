@@ -14,6 +14,8 @@
             :multiple="false"
             @select="filesSelected($event)" />
         </div>
+        <p v-if="uploading">Uploading in progress. Do not close this browser tab.</p>
+        <p v-if="youtube_id">Youtube URL : https://youtube.com/watch?v={{youtube_id}}</p>
     </div>
 </template>
 
@@ -33,7 +35,9 @@ export default {
       loading: true,
       fileRecords: [],
       uploadUrl: '/api/filetinmel/youtube',
-      fileRecordsForUpload: []
+      fileRecordsForUpload: [],
+      uploading: false,
+      youtube_id: null
     }
   },
   mounted () {
@@ -51,23 +55,25 @@ export default {
     },
     async uploadFiles () {
       try {
+        this.uploading = true
         // axios upload
         const fileForUpload = this.fileRecordsForUpload[this.fileRecordsForUpload.length - 1]
         const formData = new FormData()
         formData.append('file', fileForUpload.file)
         formData.append('title', this.title)
 
-        const filesResponse = await axios.post(this.uploadUrl, formData)
-        this.processFiles(filesResponse.data)
+        const uploadResponse = await axios.post(this.uploadUrl, formData)
+        this.afterUpload(uploadResponse.data)
+        this.uploading = false
 
         this.fileRecordsForUpload = []
       } catch (e) {
         console.error('error', e)
       }
     },
-    processFiles (files) {
+    afterUpload (data) {
       // do something with return uploaded files data
-      console.log(files)
+      this.youtube_id = data
     }
   }
 }

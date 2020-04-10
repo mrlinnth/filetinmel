@@ -1,6 +1,5 @@
 <?php
 
-//backend routes
 if (config('filetinmel.backend')) {
 
     Route::prefix('api/filetinmel')

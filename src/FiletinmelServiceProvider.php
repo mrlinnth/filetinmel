@@ -23,10 +23,13 @@ class FiletinmelServiceProvider extends ServiceProvider
 
         if ($this->app->runningInConsole()) {
 
-            // $this->loadMigrationsFrom(dirname(__DIR__) . '/database/migrations');
+            $this->loadMigrationsFrom(dirname(__DIR__) . '/database/migrations');
 
             $this->publishes([
                 $publishablePath . '/config/filetinmel.php' => config_path('filetinmel.php'),
+            ], 'filetinmel');
+            $this->publishes([
+                $publishablePath . '/config/youtube.php' => config_path('youtube.php'),
             ], 'filetinmel');
 
             $this->publishes([
@@ -52,9 +55,14 @@ class FiletinmelServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(dirname(__DIR__) . '/publishable/config/filetinmel.php', 'filetinmel');
+        $this->mergeConfigFrom(dirname(__DIR__) . '/publishable/config/youtube.php', 'youtube');
 
         $this->app->singleton('filetinmel', function ($app) {
             return new Filetinmel($app);
+        });
+
+        $this->app->singleton('youtube', function ($app) {
+            return new Youtube($app, new \Google_Client);
         });
     }
 
