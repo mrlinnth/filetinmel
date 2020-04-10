@@ -50,6 +50,10 @@ class UploadController extends Controller
     {
         $folder = ($f == null) ? config('filetinmel.s3_folder') : $f;
 
+        $request->validate([
+            'files' => 'required',
+        ]);
+
         $result = [];
         foreach ($request->file('files') as $file) {
             $path = $file->store($folder);
